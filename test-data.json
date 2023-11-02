@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "description": "test",
+  "address": "test",
+  "regularPrice": 500,
+  "discountPrice": 500,
+  "bathrooms": 5,
+  "bedrooms": 5,
+  "furnished": true,
+  "parking": true,
+  "type": "rent",
+  "offer": true,
+  "imageUrls": ["afsa", "afa"],
+  "userRef": "fdsalfkaslfas"
+}
