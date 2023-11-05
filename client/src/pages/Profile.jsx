@@ -9,6 +9,7 @@ import {
   deleteUserSuccess,
   deleteUserFailure, deleteUserStart, signOutUserStart, signOutUserFailure
 } from "../redux/user/userSlice.js";
+import {Link} from "react-router-dom";
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector(state => state.user)
@@ -20,7 +21,7 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false)
 
   const dispatch = useDispatch()
-  
+
   const handleFileUpload = (file) => {
     const storage = getStorage(app)
     const fileName = new Date().getTime() + file.name
@@ -100,7 +101,7 @@ export default function Profile() {
         return
       }
       dispatch(deleteUserSuccess(data))
-    } catch (error){
+    } catch (error) {
       dispatch(signOutUserFailure(error.message))
     }
   }
@@ -114,7 +115,7 @@ export default function Profile() {
   return (
     <div className={'p-3 max-w-lg mx-auto'}>
       <h1 className={'text-3xl font-semibold text-center my-7'}>Profile</h1>
-      <form  onSubmit={handleSubmit} action="" className={'flex flex-col'}>
+      <form onSubmit={handleSubmit} action="" className={'flex flex-col gap-4'}>
         <input onChange={(event) => setFile(event.target.files[0])}
                type="file" ref={fileRef} hidden accept={'image/.*'}/>
         <img onClick={() => fileRef.current.click()}
@@ -156,6 +157,10 @@ export default function Profile() {
           uppercase hover:opacity-95 disabled:opacity-80`}>
           {loading ? 'Loading...' : 'update'}
         </button>
+        <Link to={"/create-listing"} className={`bg-green-700 text-white p-3 rounded-lg 
+          uppercase text-center hover:opacity-95`}>
+          Create Listing
+        </Link>
       </form>
       <div className={"flex justify-between mt-5"}>
         <span onClick={handleDeleteUser} className={"text-red-700 cursor-pointer"}>Delete Account</span>
