@@ -41,7 +41,15 @@ const listingSchema = new mongoose.Schema(
     userRef: {
       type: String,
       required: true
-    }
+    },
+    regularPrice: {
+      type: Number,
+      required: true
+    },
+    discountPrice: {
+      type: Number,
+      required: true
+    },
   }, { timestamps: true }
 )
 

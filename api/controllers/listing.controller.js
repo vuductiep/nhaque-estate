@@ -37,12 +37,22 @@ export const updateListing = async (req, res, next) => {
       return next(errorHandler(401, 'You can only update your own listings!'))
     }
 
-    await Listing.findByIdAndUpdate(
+    const updatedListing = await Listing.findByIdAndUpdate(
       req.params.id,
       req.body,
       {new: true})
-    res.status(200).json('Listing has been updated!')
+    res.status(200).json(updatedListing)
 
+  } catch (error) {
+    console.log(error.message)
+    return next(errorHandler(404, 'Listing not found!'))
+  }
+}
+
+export const getListing = async (req, res, next) => {
+  try {
+    const listing = await Listing.findById(req.params.id)
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error.message)
     return next(errorHandler(404, 'Listing not found!'))
