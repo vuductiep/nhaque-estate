@@ -7,7 +7,7 @@ import {
   updateUserFailure,
   updateUserStart,
   deleteUserSuccess,
-  deleteUserFailure, deleteUserStart, signOutUserStart, signOutUserFailure
+  deleteUserFailure, deleteUserStart, signOutUserStart, signOutUserFailure, signOutUserSuccess
 } from "../redux/user/userSlice.js";
 import {Link} from "react-router-dom";
 
@@ -101,7 +101,7 @@ export default function Profile() {
         dispatch(signOutUserFailure(data.message))
         return
       }
-      dispatch(deleteUserSuccess(data))
+      dispatch(signOutUserSuccess(data))
     } catch (error) {
       dispatch(signOutUserFailure(error.message))
     }
