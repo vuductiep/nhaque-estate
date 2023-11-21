@@ -29,7 +29,7 @@ export default function CreateListing() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const handleImageSubmit = (event) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true)
       const promises = []
@@ -41,6 +41,7 @@ export default function CreateListing() {
         setImageUploadError(false)
         setUploading(false)
       }).catch((err) => {
+        console.log(err)
         setImageUploadError('Image upload failed (2 mb max per image)')
         setUploading(false)
       })
@@ -189,7 +190,7 @@ export default function CreateListing() {
 
           <div className={'flex flex-wrap gap-6'}>
             <div className={'flex items-center gap-2'}>
-              <input type="number" id={'bedroom'} min={1} max={10} required
+              <input type="number" id={'bedrooms'} min={1} max={10} required
                      onChange={handleChange} value={formData.bedrooms}
                      className={'p-3 border border-gray-300 rounded-lg'}/>
               <p>Beds</p>
