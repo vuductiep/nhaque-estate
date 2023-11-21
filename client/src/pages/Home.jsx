@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css/bundle'
 import SwiperCore from "swiper";
-import { Navigation } from "swiper/modules";
+import {Navigation} from "swiper/modules";
+import ListingItem from "../components/ListingItem.jsx";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([])
@@ -63,34 +64,86 @@ export default function Home() {
           We have a wide range of properties for you to choose from
         </div>
         <Link to={'/search'} className={'text-xs sm:text-sm text-blue-800 font-bold hover:underline'}>
-          Let's get started
+          Let&apos;s get started
         </Link>
 
       </div>
 
       {/*  swiper */}
       <Swiper navigation>
-        {
-          offerListings && offerListings.length > 1 &&
+        {offerListings &&
+          offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
-              <div key={listing._id}
-                style={{background: `url(${listing.imageUrls[0]}`, backgroundSize: "cover"}}
-                   className={'h-[500px]'}
-              >
-
-              </div>
+            <SwiperSlide key={listing._id}>
+              <div
+                style={{
+                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                  backgroundSize: 'cover',
+                }}
+                className='h-[500px]'
+              ></div>
             </SwiperSlide>
-          ))
-        }
+          ))}
       </Swiper>
 
       {/*  listing for offers */}
       <div className={'max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'}>
         {
           offerListings && offerListings.length > 0 && (
-            <div>
-              <h1></h1>
+            <div className={''}>
+              <div>
+                <h1 className={'text-2xl font-semibold text-slate-600'}>Recent Offers</h1>
+                <Link to={'/search?offer=true'} className={'text-sm text-blue-800 hover:underline'}>
+                  Show more offers
+                </Link>
+              </div>
+              <div className={'flex flex-wrap gap-4'}>
+                {
+                  offerListings.map((listing) => (
+                    <ListingItem key={listing._id} listing={listing}/>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
+
+        {
+          rentListings && rentListings.length > 0 && (
+            <div className={''}>
+              <div>
+                <h1 className={'text-2xl font-semibold text-slate-600'}>Recent places for rent</h1>
+                <Link to={'/search?type=rent'} className={'text-sm text-blue-800 hover:underline'}>
+                  Show more places for rent
+                </Link>
+              </div>
+              <div className={'flex flex-wrap gap-4'}>
+                {
+                  rentListings.map((listing) => (
+                    <ListingItem key={listing._id} listing={listing}/>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
+
+        {
+          saleListings && saleListings.length > 0 && (
+            <div className={''}>
+              <div>
+                <h1 className={'text-2xl font-semibold text-slate-600'}>Recent places for rent</h1>
+                <Link to={'/search?type=sale'} className={'text-sm text-blue-800 hover:underline'}>
+                  Show more places for sale
+                </Link>
+              </div>
+              <div className={'flex flex-wrap gap-4'}>
+                {
+                  saleListings.map((listing) => (
+                    <ListingItem key={listing._id} listing={listing}/>
+                  ))
+                }
+              </div>
             </div>
           )
         }
