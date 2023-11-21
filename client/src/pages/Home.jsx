@@ -132,7 +132,7 @@ export default function Home() {
           saleListings && saleListings.length > 0 && (
             <div className={''}>
               <div>
-                <h1 className={'text-2xl font-semibold text-slate-600'}>Recent places for rent</h1>
+                <h1 className={'text-2xl font-semibold text-slate-600'}>Recent places for sale</h1>
                 <Link to={'/search?type=sale'} className={'text-sm text-blue-800 hover:underline'}>
                   Show more places for sale
                 </Link>
